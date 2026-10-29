@@ -159,14 +159,14 @@ body {
       }
 
       .color-control {
-        @apply flex-between bg-neutral-800 rounded-full px-6 py-3 gap-4;
+        @apply flex-between bg-neutral-800 rounded-full px-4 py-2 md:px-6 md:py-3 gap-3 md:gap-4;
 
         div {
-          @apply size-7 rounded-full cursor-pointer;
+          @apply size-5 md:size-7 rounded-full cursor-pointer;
         }
 
         .active {
-          @apply ring-5 size-5 ring-light-100;
+          @apply ring-4 md:ring-5 size-4 md:size-5 ring-light-100;
         }
       }
 

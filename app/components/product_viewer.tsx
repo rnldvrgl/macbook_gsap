@@ -15,7 +15,7 @@ const ProductViewer = () => {
             <h2>Take a closer look.</h2>
             <div className="controls">
                 <p className="info text-center">Macbook Pro in {macbookColors.find((c) => c.value === color)?.name} and {macbookSizes.find((s) => s.value === scale)?.name} size.</p>
-                <div className="flex-center gap-5 mt-5">
+                <div className="flex-center flex-col md:flex-row gap-5 mt-5">
                     <div className="color-control">
                         {macbookColors.map((colorOption) => (
                             <div
