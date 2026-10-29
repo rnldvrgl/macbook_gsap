@@ -2,7 +2,7 @@ import MacbookModel14 from "@/app/components/models/Macbook-14";
 import MacbookModel16 from "@/app/components/models/Macbook-16";
 import { PresentationControlProps, PresentationControls } from "@react-three/drei";
 import { useRef } from "react";
-import { Group, MeshLambertMaterial, Object3D } from "three";
+import { Group } from "three";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 

@@ -7,7 +7,7 @@ const Navbar = () => {
     return (
         <header>
             <nav>
-                <div className="size-8 aspect-square relative">
+                <div className="size-4 lg:size-6 2xl:size-7 aspect-square relative">
                     <Image src="/logo.svg" alt="Logo" fill priority />
                 </div>
                 <ul>
