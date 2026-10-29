@@ -128,6 +128,21 @@ const footerLinks = [
     { label: "Site Map", link: "#" },
 ];
 
+const macbookColors = [
+    { id: 1, name: "Space Gray", value: "#2e2c2e" },
+    { id: 2, name: "Dark", value: "#000000" },
+    { id: 3, name: "Silver", value: "#adb5bd" },
+    { id: 4, name: "Gold", value: "#d4af37" },
+    { id: 5, name: "Rose Gold", value: "#b76e79" },
+    { id: 6, name: "Blue", value: "#1e90ff" },
+    { id: 7, name: "Green", value: "#228b22" },
+]
+
+const macbookSizes = [
+    { id: 1, name: "14\"", value: 0.06 },
+    { id: 2, name: "16\"", value: 0.08 },
+]
+
 export {
     features,
     featureSequence,
@@ -136,4 +151,6 @@ export {
     noChangeParts,
     performanceImages,
     performanceImgPositions,
+    macbookColors,
+    macbookSizes
 };
