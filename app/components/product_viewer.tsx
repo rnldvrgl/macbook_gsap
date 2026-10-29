@@ -5,9 +5,12 @@ import { OrbitControls } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { clsx } from "clsx";
 import StudioLights from "@/app/components/studio_lights";
+import ModelSwitcher from "@/app/components/three/ModelSwitcher";
+import { useMediaQuery } from "react-responsive";
 
 const ProductViewer = () => {
     const { color, scale, setColor, setScale } = useMacbookStore();
+    const isMobile = useMediaQuery({ query: "(max-width: 1024px)" });
     return (
         <section id="product-viewer">
             <h2>Take a closer look.</h2>
@@ -30,8 +33,7 @@ const ProductViewer = () => {
             </div>
             <Canvas id="canvas" camera={{ position: [0, 2, 5], fov: 50, near: 0.1, far: 100 }}>
                 <StudioLights />
-                <MacbookModel14 scale={scale} position={[0, 0, 0]} />
-                <OrbitControls enableZoom={false} />
+                <ModelSwitcher scale={isMobile ? scale - 0.03 : scale} isMobile={isMobile} />
             </Canvas>
         </section>
     );

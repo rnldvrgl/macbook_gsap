@@ -1,3 +1,5 @@
+'use client'
+
 import { navLinks } from "@/app/constants";
 import Image from "next/image";
 
@@ -5,7 +7,9 @@ const Navbar = () => {
     return (
         <header>
             <nav>
-                <Image src="/logo.svg" alt="Logo" width={30} height={30} priority />
+                <div className="size-8 aspect-square relative">
+                    <Image src="/logo.svg" alt="Logo" fill priority />
+                </div>
                 <ul>
                     {navLinks.map(({ label }) => (
                         <li key={label}>
