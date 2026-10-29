@@ -14,7 +14,7 @@ const Navbar = () => {
                     ))}
                 </ul>
 
-                <div className="flex items-center justify-center gap-3">
+                <div className="flex-center gap-3">
                     <button>
                         <Image src="/search.svg" alt="Search" width={20} height={20} />
                     </button>
