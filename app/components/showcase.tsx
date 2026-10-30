@@ -1,54 +1,42 @@
-'use client'
-
-import { Video } from "@/app/components/video";
-import { useGSAP } from "@gsap/react";
-import Image from "next/image";
+"use client"
 import { useMediaQuery } from "react-responsive";
-import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import gsap from 'gsap';
+import { ScrollTrigger } from "gsap/all";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Showcase = () => {
-    const isTablet = useMediaQuery({ query: "(max-width: 1024px)" });
+    const isTablet = useMediaQuery({ query: '(max-width: 1024px)' });
 
     useGSAP(() => {
         if (!isTablet) {
             const timeline = gsap.timeline({
                 scrollTrigger: {
-                    trigger: "#showcase",
-                    start: "top top",
-                    end: "bottom top",
+                    trigger: '#showcase',
+                    start: 'top top',
+                    end: 'bottom top',
                     scrub: true,
-                    pin: true
+                    pin: true,
                 }
-            })
+            });
 
-            timeline.to('#mask img', {
-                transform: "scale(1.1)"
-            }).to('.content', {
-                opacity: 1, y: 0, ease: 'power1.in'
-            })
+            timeline
+                .to('.mask img', {
+                    transform: 'scale(1.1)'
+                }).to('.content', { opacity: 1, y: 0, ease: 'power1.in' });
         }
-    }, [isTablet]);
+    }, [isTablet])
 
     return (
-        <section id="showcase" className="relative">
-            <div className="relative">
-                <Video
-                    src="/videos/game.mp4"
-                    className="w-full h-auto object-cover object-center"
-                    options={{ autoPlay: true, muted: true, playsInline: true, loop: true }}
-                />
-
-                <div className="absolute w-full h-full lg:-top-20 xl:top-0" id="mask">
-                    <Image
-                        src="/mask-logo.svg"
-                        alt="Game"
-                        width={500}
-                        height={500}
-                        priority
-                        className="w-auto scale-150 lg:scale-100 lg:transform-[matrix(80,0,0,80,0,0)]"
-                    />
+        <section id="showcase">
+            <div className="media">
+                <video src="/videos/game.mp4" loop muted autoPlay playsInline />
+                <div className="mask">
+                    <img src="/mask-logo.svg" />
                 </div>
             </div>
+
             <div className="content">
                 <div className="wrapper">
                     <div className="lg:max-w-md">
@@ -63,13 +51,15 @@ const Showcase = () => {
                                 . M4 powers
                             </p>
                             <p>
-                                It drives Apple Intelligence on iPad Pro, so you can write, create, and accomplish more with ease. All in a design that&apos;s unbelievably thin, light, and powerful.
+                                It drives Apple Intelligence on iPad Pro, so you can write, create, and accomplish more with ease. All in a design that’s unbelievably thin, light, and powerful.
                             </p>
                             <p>
                                 A brand-new display engine delivers breathtaking precision, color accuracy, and brightness. And a next-gen GPU with hardware-accelerated ray tracing brings console-level graphics to your fingertips.
                             </p>
+                            <p className="text-primary">Learn more about Apple Intelligence</p>
                         </div>
                     </div>
+
                     <div className="max-w-3xs space-y-14">
                         <div className="space-y-2">
                             <p>Up to</p>
@@ -84,8 +74,21 @@ const Showcase = () => {
                     </div>
                 </div>
             </div>
-        </section>
-    );
-};
 
-export default Showcase;
+            <div className="h-screen" />
+
+            <div className="h-screen" />
+
+            <div className="h-screen" />
+
+            <div className="h-screen" />
+
+            <div className="h-screen" />
+
+            <div className="h-screen" />
+
+            <div className="h-screen" />
+        </section>
+    )
+}
+export default Showcase
