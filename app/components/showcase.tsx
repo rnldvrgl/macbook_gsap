@@ -1,37 +1,75 @@
 "use client"
 import { useMediaQuery } from "react-responsive";
+import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from 'gsap';
 import { ScrollTrigger } from "gsap/all";
 
 gsap.registerPlugin(ScrollTrigger);
 
+// The mask starts zoomed in so far that only the inside of the M4 cut-out
+// (the video) is visible, then shrinks down to reveal the full logo.
+const MASK_START_SCALE = 80;
+const MASK_END_SCALE = 1.1;
+
+// Linear interpolation from 80 -> 1.1 looks static for most of the scroll and
+// then snaps at the end. Interpolating geometrically keeps the perceived zoom
+// speed constant across the whole scroll.
+const maskZoomEase = (progress: number) =>
+    (MASK_START_SCALE - MASK_START_SCALE * Math.pow(MASK_END_SCALE / MASK_START_SCALE, progress)) /
+    (MASK_START_SCALE - MASK_END_SCALE);
+
 const Showcase = () => {
     const isTablet = useMediaQuery({ query: '(max-width: 1024px)' });
+    const sectionRef = useRef<HTMLElement>(null);
 
     useGSAP(() => {
         if (!isTablet) {
-            const timeline = gsap.timeline({
-                scrollTrigger: {
-                    trigger: '#showcase',
-                    start: 'top top',
-                    end: 'bottom top',
-                    scrub: true,
-                    pin: true,
-                }
-            });
+            // Pin only the video + mask while the logo zooms out, so the content
+            // below scrolls in naturally once the pin is released.
+            gsap.fromTo('.mask img',
+                { scale: MASK_START_SCALE },
+                {
+                    scale: MASK_END_SCALE,
+                    ease: maskZoomEase,
+                    scrollTrigger: {
+                        trigger: '.media',
+                        start: 'top top',
+                        end: '+=150%',
+                        scrub: 1,
+                        pin: true,
+                    }
+                });
 
-            timeline
-                .to('.mask img', {
-                    transform: 'scale(1.1)'
-                }).to('.content', { opacity: 1, y: 0, ease: 'power1.in' });
+            gsap.fromTo('.content',
+                { opacity: 0, y: 100 },
+                {
+                    opacity: 1,
+                    y: 0,
+                    ease: 'power1.out',
+                    scrollTrigger: {
+                        trigger: '.content',
+                        start: 'top 90%',
+                        end: 'top 50%',
+                        scrub: 1,
+                    }
+                });
         }
-    }, [isTablet])
+    }, { dependencies: [isTablet], scope: sectionRef });
 
     return (
-        <section id="showcase">
+        <section id="showcase" ref={sectionRef}>
             <div className="media">
-                <video src="/videos/game.mp4" loop muted autoPlay playsInline />
+                <video
+                    src="/videos/game.mp4"
+                    loop
+                    muted
+                    autoPlay
+                    playsInline
+                    // The video has no height until its metadata loads, which shifts
+                    // every trigger position below it.
+                    onLoadedMetadata={() => ScrollTrigger.refresh()}
+                />
                 <div className="mask">
                     <img src="/mask-logo.svg" />
                 </div>
@@ -74,20 +112,6 @@ const Showcase = () => {
                     </div>
                 </div>
             </div>
-
-            <div className="h-screen" />
-
-            <div className="h-screen" />
-
-            <div className="h-screen" />
-
-            <div className="h-screen" />
-
-            <div className="h-screen" />
-
-            <div className="h-screen" />
-
-            <div className="h-screen" />
         </section>
     )
 }
