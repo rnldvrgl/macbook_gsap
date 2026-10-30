@@ -166,7 +166,7 @@ body {
         }
 
         .active {
-          @apply ring-4 md:ring-5 size-4 md:size-5 ring-light-100;
+          @apply ring-4 md:ring-5 size-5 ring-light-100;
         }
       }
 
@@ -184,31 +184,7 @@ body {
     }
   }
 
-  #showcase {
-    @apply relative;
 
-    .media {
-      @apply relative lg:overflow-hidden;
-
-      video {
-        @apply w-full object-cover object-center;
-      }
-
-      .mask {
-        @apply absolute h-full top-0 lg:-top-20 xl:top-0;
-
-        img {
-          @apply h-full scale-150 lg:scale-100;
-          transform: matrix(80, 0, 0, 80, 0, 0);
-        }
-
-        @media (max-width: 1024px) {
-          img {
-            transform: matrix(1, 0, 0, 1, 0, 0);
-          }
-        }
-      }
-    }
 
     .content {
       @apply relative z-10 my-5 lg:-mt-40 bg-black font-semibold text-xl text-dark-100 lg:opacity-0;
